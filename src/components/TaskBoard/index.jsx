@@ -12,9 +12,12 @@ const TaskBoard = () => {
   };
   return (
     <div className="task-board">
-      <button onClick={toggleForm}>
-        {isFormOpen ? 'Close Form' : 'Open Form'}
-      </button>
+      <div className="margin-bottom-10">
+        <button onClick={toggleForm}>
+          {isFormOpen ? '- Remove' : '+ Create'}
+        </button>
+      </div>
+
       <div className="flex wrap">
         <AddTask isFormOpen={isFormOpen} setIsFormOpen={setIsFormOpen} />
         <TaskList />

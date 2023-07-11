@@ -5,8 +5,8 @@ import "./index.scss"
 const TaskCard = ({ task }) => {
   return (
     <div className="task-card">
-      <p>{task.title}</p>
-      <p>{task.createdDate}</p>
+      <p className="task-card__title">{task.title}</p>
+      <p>Created At: {task.createdDate}</p>
       <button>Delete</button>
     </div>
   );
