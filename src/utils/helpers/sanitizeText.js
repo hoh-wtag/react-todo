@@ -1,2 +1,2 @@
 export const sanitizeText = (text) =>
-    text.replaceAll(/<\/?[^>]+(>|$)/gi, "").trim();
+  text.replaceAll(/<\/?[^>]+(>|$)/gi, "").trim();
