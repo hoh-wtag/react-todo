@@ -13,7 +13,11 @@ const TaskCard = ({ task }) => {
 };
 
 TaskCard.propTypes = {
-  task: PropTypes.object,
+  task: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    createdDate: PropTypes.string,
+  }),
 };
 
 export default TaskCard;
