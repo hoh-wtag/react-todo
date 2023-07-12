@@ -14,7 +14,7 @@ const AddTask = ({ isFormOpen, setIsFormOpen }) => {
     e.preventDefault();
     const sanitizedTitle = sanitizeText(title);
     if (sanitizedTitle === '') {
-      setError("Invalid Text");
+      setError('Invalid Text');
       return;
     }
     dispatch(addTask(sanitizedTitle));
@@ -25,17 +25,17 @@ const AddTask = ({ isFormOpen, setIsFormOpen }) => {
   return (
     <>
       {isFormOpen && (
-        <div className="task-form">
+        <div className='task-form'>
           <form onSubmit={handleSubmit}>
             <textarea
               className='task-form__textarea'
-              type="text"
-              placeholder="Add a task"
+              type='text'
+              placeholder='Add a task'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            {error && <small className="task-form__error">{error}</small>}
-            <button type="submit">Add Task</button>
+            {error && <small className='task-form__error'>{error}</small>}
+            <button type='submit'>Add Task</button>
           </form>
         </div>
       )}
