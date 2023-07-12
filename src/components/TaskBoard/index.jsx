@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import TaskList from '../TaskList';
-import AddTask from '../Addtask';
+import { useState } from "react";
+import TaskList from "../TaskList";
+import AddTask from "../Addtask";
 
-import './index.scss'
+import "./index.scss"
 
 const TaskBoard = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -11,14 +11,14 @@ const TaskBoard = () => {
     setIsFormOpen(!isFormOpen);
   };
   return (
-    <div className='task-board'>
-      <div className='margin-bottom-10'>
+    <div className="task-board">
+      <div className="margin-bottom-10">
         <button onClick={toggleForm}>
-          {isFormOpen ? '- Remove' : '+ Create'}
+          {isFormOpen ? "- Remove" : "+ Create"}
         </button>
       </div>
 
-      <div className='flex wrap'>
+      <div className="flex wrap">
         <AddTask isFormOpen={isFormOpen} setIsFormOpen={setIsFormOpen} />
         <TaskList />
       </div>

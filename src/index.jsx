@@ -1,15 +1,15 @@
-import ReactDOM from 'react-dom/client';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import TaskBoard from './components/TaskBoard';
-import NavBar from './components/NavBar'
-import reducer from './store/reducres';
+import ReactDOM from "react-dom/client";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import TaskBoard from "./components/TaskBoard";
+import NavBar from "./components/NavBar"
+import reducer from "./store/reducres";
 
-import './index.scss'
+import "./index.scss"
 
 const store = createStore(reducer);
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 const renderApp = () => {
   const App = (
     <>
