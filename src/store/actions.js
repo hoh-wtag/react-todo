@@ -8,3 +8,8 @@ export const addTask = (title) => ({
     createdDate: formatDate(new Date()),
   },
 });
+
+export const deleteTask = (taskId) => ({
+  type: "DELETE_TASK",
+  payload: taskId,
+});
