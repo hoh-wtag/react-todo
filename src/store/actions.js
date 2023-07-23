@@ -4,10 +4,16 @@ export const addTask = (title) => ({
     id: Date.now(),
     title,
     createdDate: new Date(),
+    done: false,
   },
 });
 
 export const deleteTask = (taskId) => ({
   type: "DELETE_TASK",
+  payload: taskId,
+});
+
+export const toggleTaskDone = (taskId) => ({
+  type: "TOGGLE_TASK_DONE",
   payload: taskId,
 });

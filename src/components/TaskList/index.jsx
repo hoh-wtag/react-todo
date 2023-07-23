@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import TaskCard from "/src/components/TaskCard";
 import PropTypes from "prop-types";
-import { deleteTask } from '/src/store/actions';
+import { deleteTask, toggleTaskDone } from '/src/store/actions';
 
 import "./index.scss";
 
@@ -14,12 +14,17 @@ const TaskList = () => {
     dispatch(deleteTask(taskId));
   };
 
+  const handleToggleDone = (taskId) => {
+    toggleTaskDone(taskId);
+  };
+
   return (
     tasks.map((task) => (
       <TaskCard
         key={task.id}
         task={task}
         onDelete={() => handleDelete(task.id)}
+        onToggleDone={() => handleToggleDone(task.id)}
       />
     ))
   );
@@ -30,6 +35,7 @@ TaskList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
+      done: PropTypes.bool.isRequired,
     })
   ),
 };

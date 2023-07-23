@@ -14,6 +14,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload),
       };
+    case "TOGGLE_TASK_DONE":
+      return {
+        ...state,
+        tasks: state.tasks.map((task) =>
+          task.id === action.payload ? { ...task, done: !task.done } : task
+        ),
+      };
     default:
       return state;
   }
