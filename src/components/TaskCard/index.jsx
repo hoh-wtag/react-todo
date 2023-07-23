@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { deleteTask } from "../../store/actions";
 import { DELETE } from "../../utils/constants/icons";
 
+import { formatDate } from "/src/utils/helpers/formatDate";
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
@@ -14,9 +15,9 @@ const TaskCard = ({ task }) => {
   return (
     <div className="task-card">
       <p className="task-card__title">{task.title}</p>
-      <p>Created At: {task.createdDate}</p>
+      <p>Created At: {formatDate(task.createdDate)}</p>
       <img src={DELETE} onClick={handleDelete} />
-    </div>
+    </div >
   );
 };
 
@@ -24,7 +25,7 @@ TaskCard.propTypes = {
   task: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    createdDate: PropTypes.string,
+    createdDate: PropTypes.instanceOf(Date).isRequired,
   }),
 };
 
