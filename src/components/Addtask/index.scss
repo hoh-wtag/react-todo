@@ -1,9 +1,11 @@
+@import "/src/index.scss";
+
 .task-form {
     border-radius: 0.313rem;
     border: 0.063rem solid;
     height: 10.188rem;
     width: 23.875rem;
-    padding: 10px;
+    padding: 0.625rem;
 
     &__textarea {
         border-radius: 0.313rem;
@@ -14,7 +16,7 @@
     }
 
     &__error {
-        color: red;
+        color: $red;
         display: block;
     }
 }

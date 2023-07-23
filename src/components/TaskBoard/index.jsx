@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TaskList from "../TaskList";
-import AddTask from "../Addtask";
+import TaskList from "/src/components/TaskList";
+import AddTask from "/src/components/Addtask";
 
 import "./index.scss"
 
@@ -14,7 +14,7 @@ const TaskBoard = () => {
     <div className="task-board">
       <div className="margin-bottom-10">
         <button onClick={toggleForm}>
-          {isFormOpen ? "- Remove" : "+ Create"}
+          + Create
         </button>
       </div>
 
