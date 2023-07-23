@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import TaskCard from "/src/components/TaskCard";
 import PropTypes from "prop-types";
-import { deleteTask } from '../../store/actions';
+import { deleteTask } from '/src/store/actions';
 
 import "./index.scss";
 
