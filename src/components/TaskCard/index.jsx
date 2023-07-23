@@ -15,7 +15,9 @@ const TaskCard = ({ task }) => {
     <div className="task-card">
       <p className="task-card__title">{task.title}</p>
       <p>Created At: {formatDate(task.createdDate)}</p>
-      <img src={ICON_DELETE} onClick={handleDelete} />
+      <button onClick={handleDelete}>
+        <img src={ICON_DELETE} />
+      </button>
     </div >
   );
 };
