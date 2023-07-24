@@ -4,6 +4,7 @@ export const addTask = (title) => ({
     id: Date.now(),
     title,
     createdDate: new Date(),
+    completedDate: null,
     done: false,
   },
 });
