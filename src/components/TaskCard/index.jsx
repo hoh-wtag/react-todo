@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+import Button from "/src/components/Button";
 import { deleteTask, toggleTaskDone } from "/src/store/actions";
 import { ICON_DELETE, ICON_DONE } from "/src/utils/constants/icons";
 import { formatDate } from "/src/utils/helpers/formatDate";
@@ -32,14 +33,16 @@ const TaskCard = ({ task }) => {
       <p>Created At: {formatDate(task.createdDate)}</p>
       {task.done ?
         <>Completed in {getDaysToCompleteTask(task.createdDate, task.completedDate)}</> :
-        <button onClick={handleToggleDone}>
-          <img src={ICON_DONE} />
-        </button>
+        <Button
+          onClick={handleToggleDone}
+          src={ICON_DONE}
+        />
       }
 
-      <button onClick={handleDelete}>
-        <img src={ICON_DELETE} />
-      </button>
+      <Button
+        onClick={handleDelete}
+        src={ICON_DELETE}
+      />
     </div >
   );
 };
