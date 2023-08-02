@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { addTask } from "/src/store/actions";
 import { sanitizeText } from "/src/utils/helpers/sanitizeText"
+import { PLACEHOLDER_TEXT_ADD_TASK } from "/src/utils/constants/placeholders.js";
 import "./index.scss";
 
 const AddTask = ({ isFormOpen, setIsFormOpen }) => {
@@ -10,8 +11,8 @@ const AddTask = ({ isFormOpen, setIsFormOpen }) => {
   const [title, setTitle] = useState("");
   const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const sanitizedTitle = sanitizeText(title);
     if (sanitizedTitle === "") {
       setError("Invalid Text");
@@ -22,6 +23,10 @@ const AddTask = ({ isFormOpen, setIsFormOpen }) => {
     setIsFormOpen(false);
   };
 
+  function handleChangeText(event) {
+    setTitle(event.target.value)
+  }
+
   return (
     <>
       {isFormOpen && (
@@ -30,12 +35,12 @@ const AddTask = ({ isFormOpen, setIsFormOpen }) => {
             <textarea
               className="task-form__textarea"
               type="text"
-              placeholder="Add a task"
+              placeholder={PLACEHOLDER_TEXT_ADD_TASK}
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={handleChangeText}
             />
             {error && <small className="task-form__error">{error}</small>}
-            <button type="submit">Add Task</button>
+            <button>Add Task</button>
           </form>
         </div>
       )}
