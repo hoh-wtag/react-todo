@@ -5,6 +5,7 @@ import "./index.scss";
 
 const TaskList = () => {
   const tasks = useSelector(state => state.tasks);
+
   return (
     tasks.map((task) => (
       <TaskCard key={task.id} task={task} />
