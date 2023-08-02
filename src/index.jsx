@@ -10,14 +10,13 @@ import "./index.scss"
 const store = createStore(reducer);
 
 const rootElement = document.getElementById("root");
+
 const renderApp = () => {
   const App = (
-    <>
+    <Provider store={store}>
       <NavBar />
-      <Provider store={store}>
-        <TaskBoard />
-      </Provider>
-    </>
+      <TaskBoard />
+    </Provider>
   );
 
   const root = ReactDOM.createRoot(rootElement);
