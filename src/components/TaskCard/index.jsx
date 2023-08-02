@@ -20,7 +20,9 @@ const TaskCard = ({ task }) => {
 
   return (
     <div className="task-card">
-      <p className="task-card__title" style={{ textDecoration: task.done ? 'line-through' : 'none' }}>{task.title}</p>
+      <p className={`${task.done ? "task-card--done__title" : "task-card__title"}`}>
+        {task.title}
+      </p>
       <p>Created At: {formatDate(task.createdDate)}</p>
       {task.done ?
         <>Completed in {getDaysToCompleteTask(task.createdDate, task.completedDate)}</> :
