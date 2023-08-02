@@ -4,20 +4,11 @@ import Button from "/src/components/Button";
 import { deleteTask, toggleTaskDone } from "/src/store/actions";
 import { ICON_DELETE, ICON_DONE } from "/src/utils/constants/icons";
 import { formatDate } from "/src/utils/helpers/formatDate";
+import { getDaysToCompleteTask } from "/src/utils/helpers/compareDates"
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
   const dispatch = useDispatch();
-
-  function getDaysToCompleteTask(startDate, endDate) {
-    const millisecondsInADay = 24 * 60 * 60 * 1000;
-    const diffInMilliseconds = endDate - startDate;
-    const diffInDays = Math.floor(diffInMilliseconds / millisecondsInADay) + 1;
-
-    const daysStr = (diffInDays > 1) ? `${diffInDays} days` : `${diffInDays} day`;
-
-    return daysStr;
-  }
 
   const handleDelete = () => {
     dispatch(deleteTask(task.id));
