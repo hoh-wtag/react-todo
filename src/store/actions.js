@@ -18,3 +18,11 @@ export const toggleTaskDone = (taskId) => ({
   type: "TOGGLE_TASK_DONE",
   payload: taskId,
 });
+
+export const editTask = (taskId, newTitle) => ({
+  type: "EDIT_TASK",
+  payload: {
+    taskId,
+    newTitle,
+  },
+});

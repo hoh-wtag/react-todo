@@ -23,6 +23,15 @@ const reducer = (state = initialState, action) => {
             : task
         ),
       };
+    case "EDIT_TASK":
+      return {
+        ...state,
+        tasks: state.tasks.map((task) =>
+          task.id === action.payload.taskId
+            ? { ...task, title: action.payload.newTitle }
+            : task
+        ),
+      };
     default:
       return state;
   }
