@@ -8,7 +8,6 @@ import NavBar from "/src/components/NavBar"
 import "./index.scss"
 
 const store = createStore(reducer);
-
 const rootElement = document.getElementById("root");
 
 const renderApp = () => {
