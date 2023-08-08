@@ -3,10 +3,10 @@ import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { addTask } from "/src/store/actions";
 import { sanitizeText } from "/src/utils/helpers/sanitizeText"
-import { PLACEHOLDER_TEXT_ADD_TASK } from "/src/utils/constants/placeholders.js";
+import { PLACEHOLDER_TEXT_ADD_TASK } from "/src/utils/constants/texts.js";
 import "./index.scss";
 
-const AddTask = ({ isFormOpen, setIsFormOpen }) => {
+const AddTask = ({ setIsFormOpen }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [error, setError] = useState(null);
@@ -28,28 +28,23 @@ const AddTask = ({ isFormOpen, setIsFormOpen }) => {
   }
 
   return (
-    <>
-      {isFormOpen && (
-        <div className="task-form">
-          <form onSubmit={handleSubmit}>
-            <textarea
-              className="task-form__textarea"
-              type="text"
-              placeholder={PLACEHOLDER_TEXT_ADD_TASK}
-              value={title}
-              onChange={handleChangeText}
-            />
-            {error && <small className="task-form__error">{error}</small>}
-            <button>Add Task</button>
-          </form>
-        </div>
-      )}
-    </>
+    <div className="task-form">
+      <form onSubmit={handleSubmit}>
+        <textarea
+          className="task-form__textarea"
+          type="text"
+          placeholder={PLACEHOLDER_TEXT_ADD_TASK}
+          value={title}
+          onChange={handleChangeText}
+        />
+        {error && <small className="task-form__error">{error}</small>}
+        <button>Add Task</button>
+      </form>
+    </div>
   );
 };
 
 AddTask.propTypes = {
-  isFormOpen: PropTypes.bool.isRequired,
   setIsFormOpen: PropTypes.func.isRequired,
 };
 
