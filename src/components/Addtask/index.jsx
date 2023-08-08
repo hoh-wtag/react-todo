@@ -3,7 +3,11 @@ import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { addTask } from "/src/store/actions";
 import { sanitizeText } from "/src/utils/helpers/sanitizeText"
-import { PLACEHOLDER_TEXT_ADD_TASK } from "/src/utils/constants/texts.js";
+import {
+  PLACEHOLDER_TEXT_ADD_TASK,
+  ALT_TEXT_DELETE_ICON,
+} from "/src/utils/constants/texts.js";
+import { ICON_DELETE } from "/src/utils/constants/icons";
 import "./index.scss";
 
 const AddTask = ({ setIsFormOpen }) => {
@@ -20,6 +24,10 @@ const AddTask = ({ setIsFormOpen }) => {
     }
     dispatch(addTask(sanitizedTitle));
     setTitle("");
+    setIsFormOpen(false);
+  };
+
+  const handleCloseForm = () => {
     setIsFormOpen(false);
   };
 
@@ -40,6 +48,9 @@ const AddTask = ({ setIsFormOpen }) => {
         {error && <small className="task-form__error">{error}</small>}
         <button>Add Task</button>
       </form>
+      <button onClick={handleCloseForm}>
+        <img src={ICON_DELETE} alt={ALT_TEXT_DELETE_ICON} />
+      </button>
     </div>
   );
 };
