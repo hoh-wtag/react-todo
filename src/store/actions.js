@@ -1,4 +1,4 @@
-import { ADD_TASK } from "@store/types";
+import { ADD_TASK, DELETE_TASK } from "@store/types";
 
 export const addTask = (title) => ({
   type: ADD_TASK,
@@ -10,6 +10,6 @@ export const addTask = (title) => ({
 });
 
 export const deleteTask = (taskId) => ({
-  type: "DELETE_TASK",
+  type: DELETE_TASK,
   payload: taskId,
 });
