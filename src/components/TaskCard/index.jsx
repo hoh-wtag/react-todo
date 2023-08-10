@@ -5,7 +5,11 @@ import Button from "@components/Button";
 import { deleteTask, toggleTaskDone, editTask } from "@store/actions";
 import { sanitizeText } from "@utils/helpers/sanitizeText"
 import { ICON_DELETE, ICON_DONE, ICON_EDIT } from "@utils/constants/icons";
-import { ALT_TEXT_DELETE_ICON, ALT_TEXT_DONE_ICON } from "@utils/constants/texts";
+import {
+  ALT_TEXT_DELETE_ICON,
+  ALT_TEXT_DONE_ICON,
+  ALT_TEXT_EDIT_ICON,
+} from "@utils/constants/texts";
 import { formatDate } from "@utils/helpers/formatDate";
 import { getDaysToCompleteTask } from "@utils/helpers/compareDates"
 import "./index.scss"
@@ -78,6 +82,7 @@ const TaskCard = ({ task }) => {
           }
           <Button
             onClick={handleEdit}
+            alt={ALT_TEXT_EDIT_ICON}
             src={ICON_EDIT}
           />
           <Button
