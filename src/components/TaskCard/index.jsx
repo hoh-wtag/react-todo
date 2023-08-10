@@ -1,31 +1,33 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import Button from "/src/components/Button";
-import { deleteTask, toggleTaskDone } from "/src/store/actions";
-import { ICON_DELETE, ICON_DONE } from "/src/utils/constants/icons";
-import { formatDate } from "/src/utils/helpers/formatDate";
-import { getDaysToCompleteTask } from "/src/utils/helpers/compareDates"
+import Button from "@components/Button";
+import { deleteTask, toggleTaskDone } from "@store/actions";
+import { ICON_DELETE, ICON_DONE } from "@utils/constants/icons";
+import { ALT_TEXT_DELETE_ICON } from "@utils/constants/texts";
+import { formatDate } from "@utils/helpers/formatDate";
+import { getDaysToCompleteTask } from "@utils/helpers/compareDates"
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
+  const { id, title, createdDate, completedDate, done } = task;
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteTask(task.id));
+    dispatch(deleteTask(id));
   };
 
   const handleToggleDone = () => {
-    dispatch(toggleTaskDone(task.id));
+    dispatch(toggleTaskDone(id));
   };
 
   return (
     <div className="task-card">
-      <p className={`${task.done ? "task-card--done__title" : "task-card__title"}`}>
-        {task.title}
+      <p className={`${done ? "task-card--done__title" : "task-card__title"}`}>
+        {title}
       </p>
-      <p>Created At: {formatDate(task.createdDate)}</p>
-      {task.done ?
-        <>Completed in {getDaysToCompleteTask(task.createdDate, task.completedDate)}</> :
+      <p>Created At: {formatDate(createdDate)}</p>
+      {done ?
+        <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
         <Button
           onClick={handleToggleDone}
           src={ICON_DONE}
@@ -36,13 +38,13 @@ const TaskCard = ({ task }) => {
         onClick={handleDelete}
         src={ICON_DELETE}
       />
-    </div >
-  );
+    </div>
+  )
 };
 
 TaskCard.propTypes = {
   task: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     createdDate: PropTypes.instanceOf(Date).isRequired,
     completedDate: PropTypes.instanceOf(Date),
