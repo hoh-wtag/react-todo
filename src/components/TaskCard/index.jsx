@@ -3,10 +3,12 @@ import { formatDate } from "@utils/helpers/formatDate";
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
+  const { title, createdDate } = task;
+
   return (
     <div className="task-card">
-      <p className="task-card__title">{task.title}</p>
-      <p>Created At: {formatDate(task.createdDate)}</p>
+      <p className="task-card__title">{title}</p>
+      <p>Created At: {formatDate(createdDate)}</p>
     </div>
   );
 };
