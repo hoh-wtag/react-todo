@@ -1,8 +1,8 @@
-import logo from "/src/assets/images/logo.png";
-import search from "/src/assets/images/search.png";
-import delete_icon from "/src/assets/images/delete.png";
-import done_icon from "/src/assets/images/done.png";
-import edit_icon from "/src/assets/images/edit.png";
+import logo from "@assets/images/logo.png";
+import search from "@assets/images/search.png";
+import delete_icon from "@assets/images/delete.png";
+import done_icon from "@assets/images/done.png";
+import edit_icon from "@assets/images/edit.png";
 
 export const BRAND_LOGO = logo;
 export const ICON_SEARCH = search;

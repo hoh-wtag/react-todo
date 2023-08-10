@@ -1,26 +1,28 @@
 import { useState } from 'react';
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import Button from "/src/components/Button";
-import { deleteTask, toggleTaskDone, editTask } from "/src/store/actions";
-import { sanitizeText } from "/src/utils/helpers/sanitizeText"
-import { ICON_DELETE, ICON_DONE, ICON_EDIT } from "/src/utils/constants/icons";
-import { formatDate } from "/src/utils/helpers/formatDate";
-import { getDaysToCompleteTask } from "/src/utils/helpers/compareDates"
+import Button from "@components/Button";
+import { deleteTask, toggleTaskDone, editTask } from "@store/actions";
+import { sanitizeText } from "@utils/helpers/sanitizeText"
+import { ICON_DELETE, ICON_DONE, ICON_EDIT } from "@utils/constants/icons";
+import { ALT_TEXT_DELETE_ICON, ALT_TEXT_DONE_ICON } from "@utils/constants/texts";
+import { formatDate } from "@utils/helpers/formatDate";
+import { getDaysToCompleteTask } from "@utils/helpers/compareDates"
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
+  const { id, title, createdDate, completedDate, done } = task;
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
   const [error, setError] = useState(null);
 
   const handleDelete = () => {
-    dispatch(deleteTask(task.id));
+    dispatch(deleteTask(id));
   };
 
   const handleToggleDone = () => {
-    dispatch(toggleTaskDone(task.id));
+    dispatch(toggleTaskDone(id));
   };
 
   const handleEdit = () => {
@@ -33,12 +35,12 @@ const TaskCard = ({ task }) => {
       setError("Invalid Text");
       return;
     }
-    dispatch(editTask(task.id, sanitizedEditedTitle));
+    dispatch(editTask(id, sanitizedEditedTitle));
     setEditMode(false);
   };
 
   const handleCancel = () => {
-    setEditedTitle(task.title);
+    setEditedTitle(title);
     setEditMode(false);
   };
 
@@ -62,14 +64,15 @@ const TaskCard = ({ task }) => {
         </div >
       ) : (
         <div className="task-card">
-          <p className={`${task.done ? "task-card--done__title" : "task-card__title"}`}>
-            {task.title}
+          <p className={`${done ? "task-card--done__title" : "task-card__title"}`}>
+            {title}
           </p>
-          <p>Created At: {formatDate(task.createdDate)}</p>
-          {task.done ?
-            <>Completed in {getDaysToCompleteTask(task.createdDate, task.completedDate)}</> :
+          <p>Created At: {formatDate(createdDate)}</p>
+          {done ?
+            <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
             <Button
               onClick={handleToggleDone}
+              alt={ALT_TEXT_DELETE_ICON}
               src={ICON_DONE}
             />
           }
@@ -79,6 +82,7 @@ const TaskCard = ({ task }) => {
           />
           <Button
             onClick={handleDelete}
+            alt={ALT_TEXT_DONE_ICON}
             src={ICON_DELETE}
           />
         </div>
@@ -90,7 +94,7 @@ const TaskCard = ({ task }) => {
 
 TaskCard.propTypes = {
   task: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     createdDate: PropTypes.instanceOf(Date).isRequired,
     completedDate: PropTypes.instanceOf(Date),
