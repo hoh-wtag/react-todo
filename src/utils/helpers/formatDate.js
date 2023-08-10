@@ -1,10 +1,11 @@
 export const formatDate = (date) => {
-  const year = date.getFullYear().toString().slice(-2);
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const format = "2-digit";
 
-  const formattedMonth = month.toString().padStart(2, '0');
-  const formattedDay = day.toString().padStart(2, '0');
+  const dateFormatOptions = {
+    year: format,
+    month: format,
+    day: format,
+  };
 
-  return `${formattedDay}.${formattedMonth}.${year}`;
+  return new Intl.DateTimeFormat("de", dateFormatOptions).format(date);
 };
