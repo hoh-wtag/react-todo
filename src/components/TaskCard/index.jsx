@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { deleteTask } from "/src/store/actions";
-import { ICON_DELETE } from "/src/utils/constants/icons";
-import { ALT_TEXT_DELETE_ICON } from "/src/utils/constants/texts";
-import { formatDate } from "/src/utils/helpers/formatDate";
+import { deleteTask } from "@store/actions";
+import { ICON_DELETE } from "@utils/constants/icons";
+import { ALT_TEXT_DELETE_ICON } from "@utils/constants/texts";
+import { formatDate } from "@utils/helpers/formatDate";
 import "./index.scss"
 
 const TaskCard = ({ task }) => {

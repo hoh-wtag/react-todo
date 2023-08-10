@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import { addTask } from "/src/store/actions";
-import { sanitizeText } from "/src/utils/helpers/sanitizeText"
+import { addTask } from "@store/actions";
+import { sanitizeText } from "@utils/helpers/sanitizeText"
 import {
   PLACEHOLDER_TEXT_ADD_TASK,
   ALT_TEXT_DELETE_ICON,
-} from "/src/utils/constants/texts.js";
-import { ICON_DELETE } from "/src/utils/constants/icons";
+} from "@utils/constants/texts.js";
+import { ICON_DELETE } from "@utils/constants/icons";
 import "./index.scss";
 
 const AddTask = ({ setIsFormOpen }) => {
