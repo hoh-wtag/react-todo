@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import TaskCard from "/src/components/TaskCard";
 import PropTypes from "prop-types";
+import TaskCard from "@components/TaskCard";
 import "./index.scss";
 
 const TaskList = () => {

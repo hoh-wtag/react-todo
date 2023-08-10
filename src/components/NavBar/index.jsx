@@ -1,11 +1,11 @@
 import {
   BRAND_LOGO,
   ICON_SEARCH,
-} from "/src/utils/constants/icons.js";
+} from "@utils/constants/icons.js";
 import {
   ALT_TEXT_LOGO_ICON,
   ALT_TEXT_SEARCH_ICON,
-} from "/src/utils/constants/texts.js";
+} from "@utils/constants/texts.js";
 import "./index.scss"
 
 const Navbar = () => {

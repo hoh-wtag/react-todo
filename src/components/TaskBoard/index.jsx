@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TaskList from "/src/components/TaskList";
-import AddTask from "/src/components/Addtask";
+import TaskList from "@components/TaskList";
+import AddTask from "@components/Addtask";
 import "./index.scss"
 
 const TaskBoard = () => {

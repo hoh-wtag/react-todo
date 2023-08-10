@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { formatDate } from "/src/utils/helpers/formatDate";
+import { formatDate } from "@utils/helpers/formatDate";
 import "./index.scss"
 
 const TaskCard = ({ task }) => {

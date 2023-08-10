@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import { addTask } from "/src/store/actions";
-import { sanitizeText } from "/src/utils/helpers/sanitizeText"
-import { PLACEHOLDER_TEXT_ADD_TASK } from "/src/utils/constants/texts.js";
+import { addTask } from "@store/actions";
+import { sanitizeText } from "@utils/helpers/sanitizeText"
+import { PLACEHOLDER_TEXT_ADD_TASK } from "@utils/constants/texts.js";
 import "./index.scss";
 
 const AddTask = ({ setIsFormOpen }) => {
