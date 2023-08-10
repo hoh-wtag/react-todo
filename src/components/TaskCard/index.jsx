@@ -7,25 +7,27 @@ import { formatDate } from "@utils/helpers/formatDate";
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
+  const { id, title, createdDate } = task;
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteTask(task.id));
+    dispatch(deleteTask(id));
   };
+
   return (
     <div className="task-card">
-      <p className="task-card__title">{task.title}</p>
-      <p>Created At: {formatDate(task.createdDate)}</p>
+      <p className="task-card__title">{title}</p>
+      <p>Created At: {formatDate(createdDate)}</p>
       <button onClick={handleDelete}>
         <img src={ICON_DELETE} alt={ALT_TEXT_DELETE_ICON} />
       </button>
     </div >
-  );
+  )
 };
 
 TaskCard.propTypes = {
   task: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     createdDate: PropTypes.instanceOf(Date).isRequired,
   }),
