@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+import Button from "@components/Button";
 import { deleteTask } from "@store/actions";
 import { ICON_DELETE } from "@utils/constants/icons";
 import { ALT_TEXT_DELETE_ICON } from "@utils/constants/texts";
@@ -18,9 +19,11 @@ const TaskCard = ({ task }) => {
     <div className="task-card">
       <p className="task-card__title">{title}</p>
       <p>Created At: {formatDate(createdDate)}</p>
-      <button onClick={handleDelete}>
-        <img src={ICON_DELETE} alt={ALT_TEXT_DELETE_ICON} />
-      </button>
+      <Button
+        onClick={handleDelete}
+        alt={ALT_TEXT_DELETE_ICON}
+        src={ICON_DELETE}
+      />
     </div >
   )
 };

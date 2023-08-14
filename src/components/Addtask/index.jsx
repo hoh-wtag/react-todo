@@ -24,7 +24,7 @@ const AddTask = ({ setIsFormOpen }) => {
     }
     dispatch(addTask(sanitizedTitle));
     setTitle("");
-    setIsFormOpen(false);
+    handleCloseForm();
   };
 
   const handleCloseForm = () => {
