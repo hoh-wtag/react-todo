@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "/src/components/Button/index.scss";
+import "@components/Button/index.scss";
 
 function Button({ src, alt, onClick }) {
   return (
