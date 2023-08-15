@@ -76,7 +76,7 @@ const TaskCard = ({ task }) => {
             <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
             <Button
               onClick={handleToggleDone}
-              alt={ALT_TEXT_DELETE_ICON}
+              alt={ALT_TEXT_DONE_ICON}
               src={ICON_DONE}
             />
           }
@@ -87,7 +87,7 @@ const TaskCard = ({ task }) => {
           />
           <Button
             onClick={handleDelete}
-            alt={ALT_TEXT_DONE_ICON}
+            alt={ALT_TEXT_DELETE_ICON}
             src={ICON_DELETE}
           />
         </div>
