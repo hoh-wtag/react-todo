@@ -1,14 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import TaskList from "@components/TaskList";
 import AddTask from "@components/Addtask";
+import { MAX_TASK_PER_PAGE } from "@utils/constants/values";
 import "./index.scss"
 
 const TaskBoard = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [visibleTaskRange, setVisibleTaskRange] = useState(MAX_TASK_PER_PAGE);
+  const tasks = useSelector((state) => state.tasks);
 
   const handleOpenForm = () => {
     setIsFormOpen(true);
   };
+
+  const totalTasks = tasks.length;
+  let numberOfTasksOnScreen = totalTasks;
+
+  if (isFormOpen) {
+    numberOfTasksOnScreen += 1;
+  }
+
+  const isLoadMore =
+    numberOfTasksOnScreen > MAX_TASK_PER_PAGE && visibleTaskRange <= totalTasks;
+  const isLoadLess =
+    visibleTaskRange >= totalTasks && totalTasks > MAX_TASK_PER_PAGE;
+
+  function showMoreTasks() {
+    setVisibleTaskRange((prevValue) => prevValue + MAX_TASK_PER_PAGE);
+  }
+
+  function showLessTasks() {
+    setVisibleTaskRange(MAX_TASK_PER_PAGE);
+  }
+
+  useEffect(() => {
+    if (numberOfTasksOnScreen <= MAX_TASK_PER_PAGE) {
+      showLessTasks();
+    }
+  }, [numberOfTasksOnScreen]);
 
   return (
     <div className="task-board">
@@ -22,7 +52,27 @@ const TaskBoard = () => {
         {isFormOpen && (
           <AddTask isFormOpen={isFormOpen} setIsFormOpen={setIsFormOpen} />
         )}
-        <TaskList />
+        <TaskList
+          tasks={tasks}
+          visibleTaskRange={visibleTaskRange}
+          isFormOpen={isFormOpen}
+        />
+      </div>
+      <div>
+        {isLoadMore && (
+          <button
+            onClick={showMoreTasks}
+          >
+            Load More
+          </button>
+        )}
+        {isLoadLess && (
+          <button
+            onClick={showLessTasks}
+          >
+            Load Less
+          </button>
+        )}
       </div>
     </div>
   );
