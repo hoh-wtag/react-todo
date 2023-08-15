@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import PropTypes from "prop-types";
 import TaskCard from "@components/TaskCard";
-import { deleteTask, toggleTaskDone } from '@store/actions';
+import { deleteTask, setTaskDone } from '@store/actions';
 import "./index.scss";
 
 const TaskList = () => {
@@ -13,8 +13,8 @@ const TaskList = () => {
     dispatch(deleteTask(taskId));
   };
 
-  const handleToggleDone = (taskId) => {
-    toggleTaskDone(taskId);
+  const handleDone = (taskId) => {
+    setTaskDone(taskId);
   };
 
   return (
@@ -23,7 +23,7 @@ const TaskList = () => {
         key={task.id}
         task={task}
         onDelete={() => handleDelete(task.id)}
-        onToggleDone={() => handleToggleDone(task.id)}
+        onDone={() => handleDone(task.id)}
       />
     ))
   );
