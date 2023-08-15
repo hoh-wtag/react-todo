@@ -1,9 +1,4 @@
-import {
-  ADD_TASK,
-  DELETE_TASK,
-  TOGGLE_TASK_DONE,
-  EDIT_TASK,
-} from "@store/types";
+import { ADD_TASK, DELETE_TASK, SET_TASK_DONE, EDIT_TASK } from "@store/types";
 
 const initialState = {
   tasks: [],
@@ -21,7 +16,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload),
       };
-    case TOGGLE_TASK_DONE:
+    case SET_TASK_DONE:
       return {
         ...state,
         tasks: state.tasks.map((task) =>

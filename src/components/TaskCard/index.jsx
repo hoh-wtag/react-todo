@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import Button from "@components/Button";
-import { deleteTask, toggleTaskDone, editTask } from "@store/actions";
+import { deleteTask, setTaskDone, editTask } from "@store/actions";
 import { sanitizeText } from "@utils/helpers/sanitizeText"
 import { ICON_DELETE, ICON_DONE, ICON_EDIT } from "@utils/constants/icons";
 import {
@@ -25,8 +25,8 @@ const TaskCard = ({ task }) => {
     dispatch(deleteTask(id));
   };
 
-  const handleToggleDone = () => {
-    dispatch(toggleTaskDone(id));
+  const handleDone = () => {
+    dispatch(setTaskDone(id));
   };
 
   const handleEdit = () => {
@@ -75,7 +75,7 @@ const TaskCard = ({ task }) => {
           {done ?
             <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
             <Button
-              onClick={handleToggleDone}
+              onClick={handleDone}
               alt={ALT_TEXT_DONE_ICON}
               src={ICON_DONE}
             />
