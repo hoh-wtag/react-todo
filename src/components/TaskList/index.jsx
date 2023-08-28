@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import PropTypes from "prop-types";
-import TaskCard from "@components/TaskCard";
 import { deleteTask, setTaskDone } from '@store/actions';
+import TaskCard from "@components/TaskCard";
 import "./index.scss";
 
 const TaskList = () => {

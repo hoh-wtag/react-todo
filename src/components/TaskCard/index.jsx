@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import Button from "@components/Button";
 import { deleteTask, setTaskDone } from "@store/actions";
 import { ICON_DELETE, ICON_DONE } from "@utils/constants/icons";
 import { ALT_TEXT_DELETE_ICON, ALT_TEXT_DONE_ICON } from "@utils/constants/texts";
 import { formatDate } from "@utils/helpers/formatDate";
 import { compareDates } from "@utils/helpers/compareDates"
+import Button from "@components/Button";
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
