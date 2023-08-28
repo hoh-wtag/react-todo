@@ -5,7 +5,7 @@ import { deleteTask, setTaskDone } from "@store/actions";
 import { ICON_DELETE, ICON_DONE } from "@utils/constants/icons";
 import { ALT_TEXT_DELETE_ICON, ALT_TEXT_DONE_ICON } from "@utils/constants/texts";
 import { formatDate } from "@utils/helpers/formatDate";
-import { getDaysToCompleteTask } from "@utils/helpers/compareDates"
+import { compareDates } from "@utils/helpers/compareDates"
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
@@ -18,6 +18,13 @@ const TaskCard = ({ task }) => {
 
   const handleDone = () => {
     dispatch(setTaskDone(id));
+  };
+
+  const getDaysToCompleteTask = (startDate, endDate) => {
+    const diffInDays = compareDates(startDate, endDate);
+    const daysStr = diffInDays > 1 ? `${diffInDays} days` : `${diffInDays} day`;
+
+    return daysStr;
   };
 
   return (
