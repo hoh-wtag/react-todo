@@ -9,7 +9,7 @@ import { compareDates } from "@utils/helpers/compareDates"
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
-  const { id, title, createdDate, completedDate, done } = task;
+  const { id, title, createdDate, completedDate, isDone } = task;
   const dispatch = useDispatch();
 
   const handleDelete = () => {
@@ -29,11 +29,11 @@ const TaskCard = ({ task }) => {
 
   return (
     <div className="task-card">
-      <p className={`${done ? "task-card--done__title" : "task-card__title"}`}>
+      <p className={`${isDone ? "task-card--done__title" : "task-card__title"}`}>
         {title}
       </p>
       <p>Created At: {formatDate(createdDate)}</p>
-      {done ?
+      {isDone ?
         <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
         <Button
           onClick={handleDone}
@@ -57,7 +57,7 @@ TaskCard.propTypes = {
     title: PropTypes.string.isRequired,
     createdDate: PropTypes.instanceOf(Date).isRequired,
     completedDate: PropTypes.instanceOf(Date),
-    done: PropTypes.bool.isRequired,
+    isDone: PropTypes.bool.isRequired,
   }),
 };
 
