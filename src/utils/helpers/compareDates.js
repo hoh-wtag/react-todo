@@ -1,4 +1,4 @@
-import { MILLI_SECONDS_IN_A_DAY } from "/src/utils/constants/values";
+import { MILLI_SECONDS_IN_A_DAY } from "@utils/constants/values";
 
 export const compareDates = (startDate, endDate) => {
   const millisecondsInADay = MILLI_SECONDS_IN_A_DAY;
