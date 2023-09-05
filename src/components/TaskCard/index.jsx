@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { deleteTask, setTaskDone, editTask } from "@store/actions";
@@ -72,8 +72,8 @@ const TaskCard = ({ task }) => {
             onChange={handleChange}
           />
           {error && <small className="task-form__error">{error}</small>}
-          <TextButton buttonText={'Save'} onClick={handleSave} />
-          <TextButton buttonText={'Cancel'} onClick={handleCancel} />
+          <TextButton buttonText={"Save"} onClick={handleSave} />
+          <TextButton buttonText={"Cancel"} onClick={handleCancel} />
         </div >
       ) : (
         <div className="task-card">
