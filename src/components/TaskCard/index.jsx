@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import Button from "@components/Button";
 import { deleteTask, setTaskDone, editTask } from "@store/actions";
 import { sanitizeText } from "@utils/helpers/sanitizeText"
 import { ICON_DELETE, ICON_DONE, ICON_EDIT } from "@utils/constants/icons";
@@ -11,11 +10,12 @@ import {
   ALT_TEXT_EDIT_ICON,
 } from "@utils/constants/texts";
 import { formatDate } from "@utils/helpers/formatDate";
-import { getDaysToCompleteTask } from "@utils/helpers/compareDates"
+import { compareDates } from "@utils/helpers/compareDates"
+import Button from "@components/Button";
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
-  const { id, title, createdDate, completedDate, done } = task;
+  const { id, title, createdDate, completedDate, isDone } = task;
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
@@ -32,6 +32,14 @@ const TaskCard = ({ task }) => {
   const handleEdit = () => {
     setEditMode(true);
   };
+
+  const getDaysToCompleteTask = (startDate, endDate) => {
+    const diffInDays = compareDates(startDate, endDate);
+    const daysStr = diffInDays > 1 ? `${diffInDays} days` : `${diffInDays} day`;
+
+    return daysStr;
+  };
+
 
   const handleSave = () => {
     const sanitizedEditedTitle = sanitizeText(editedTitle);
@@ -68,11 +76,11 @@ const TaskCard = ({ task }) => {
         </div >
       ) : (
         <div className="task-card">
-          <p className={`${done ? "task-card--done__title" : "task-card__title"}`}>
+          <p className={`${isDone ? "task-card--done__title" : "task-card__title"}`}>
             {title}
           </p>
           <p>Created At: {formatDate(createdDate)}</p>
-          {done ?
+          {isDone ?
             <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
             <Button
               onClick={handleDone}
@@ -103,7 +111,7 @@ TaskCard.propTypes = {
     title: PropTypes.string.isRequired,
     createdDate: PropTypes.instanceOf(Date).isRequired,
     completedDate: PropTypes.instanceOf(Date),
-    done: PropTypes.bool.isRequired,
+    isDone: PropTypes.bool.isRequired,
   }),
 };
 
