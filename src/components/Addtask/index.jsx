@@ -7,6 +7,8 @@ import {
   PLACEHOLDER_TEXT_ADD_TASK,
   ALT_TEXT_DELETE_ICON,
 } from "@utils/constants/texts.js";
+import IconButton from "@components/IconButton";
+import TextButton from "@components/TextButton";
 import { ICON_DELETE } from "@utils/constants/icons";
 import "./index.scss";
 
@@ -46,11 +48,14 @@ const AddTask = ({ setIsFormOpen }) => {
           onChange={handleChangeText}
         />
         {error && <small className="task-form__error">{error}</small>}
-        <button>Add Task</button>
+        <TextButton buttonText={"Add Task"} />
       </form>
-      <button onClick={handleCloseForm}>
-        <img src={ICON_DELETE} alt={ALT_TEXT_DELETE_ICON} />
-      </button>
+      <IconButton
+        onClick={handleCloseForm}
+        alt={ALT_TEXT_DELETE_ICON}
+        src={ICON_DELETE}
+      />
+
     </div>
   );
 };

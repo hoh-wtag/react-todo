@@ -1,7 +1,7 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
+import { deleteTask, setTaskDone } from "@store/actions";
 import TaskCard from "@components/TaskCard";
-import { deleteTask, setTaskDone } from '@store/actions';
 import "./index.scss";
 
 const TaskList = ({ tasks, visibleTaskRange, isFormOpen }) => {
@@ -39,7 +39,7 @@ TaskList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      done: PropTypes.bool.isRequired,
+      isDone: PropTypes.bool.isRequired,
       createdDate: PropTypes.instanceOf(Date).isRequired,
     })
   ),

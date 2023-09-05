@@ -21,7 +21,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.map((task) =>
           task.id === action.payload
-            ? { ...task, done: true, completedDate: new Date() }
+            ? { ...task, isDone: true, completedDate: new Date() }
             : task
         ),
       };

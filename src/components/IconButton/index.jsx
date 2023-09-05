@@ -1,18 +1,18 @@
 import PropTypes from "prop-types";
-import "@components/Button/index.scss";
+import "@components/IconButton/index.scss";
 
-function Button({ src, alt, onClick }) {
+function IconButton({ src, alt, onClick }) {
   return (
-    <button onClick={onClick} className="button">
+    <button onClick={onClick} className="iconButton">
       <img src={src} alt={alt} />
     </button>
   );
 }
 
-Button.propTypes = {
+IconButton.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
-export default Button;
+export default IconButton;
