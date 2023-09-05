@@ -11,7 +11,8 @@ import {
 } from "@utils/constants/texts";
 import { formatDate } from "@utils/helpers/formatDate";
 import { compareDates } from "@utils/helpers/compareDates"
-import Button from "@components/Button";
+import IconButton from "@components/IconButton";
+import TextButton from "@components/TextButton";
 import "./index.scss"
 
 const TaskCard = ({ task }) => {
@@ -71,8 +72,8 @@ const TaskCard = ({ task }) => {
             onChange={handleChange}
           />
           {error && <small className="task-form__error">{error}</small>}
-          <button onClick={handleSave} > Save</button>
-          <button onClick={handleCancel}>Cancel</button>
+          <TextButton buttonText={'Save'} onClick={handleSave} />
+          <TextButton buttonText={'Cancel'} onClick={handleCancel} />
         </div >
       ) : (
         <div className="task-card">
@@ -82,18 +83,18 @@ const TaskCard = ({ task }) => {
           <p>Created At: {formatDate(createdDate)}</p>
           {isDone ?
             <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
-            <Button
+            <IconButton
               onClick={handleDone}
               alt={ALT_TEXT_DONE_ICON}
               src={ICON_DONE}
             />
           }
-          <Button
+          <IconButton
             onClick={handleEdit}
             alt={ALT_TEXT_EDIT_ICON}
             src={ICON_EDIT}
           />
-          <Button
+          <IconButton
             onClick={handleDelete}
             alt={ALT_TEXT_DELETE_ICON}
             src={ICON_DELETE}
