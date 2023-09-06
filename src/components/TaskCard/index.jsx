@@ -11,6 +11,7 @@ import {
 } from "@utils/constants/texts";
 import { formatDate } from "@utils/helpers/formatDate";
 import { compareDates } from "@utils/helpers/compareDates"
+import { displayToastNotification } from "@utils/helpers/displayToastNotification";
 import IconButton from "@components/IconButton";
 import TextButton from "@components/TextButton";
 import "./index.scss"
@@ -24,10 +25,12 @@ const TaskCard = ({ task }) => {
 
   const handleDelete = () => {
     dispatch(deleteTask(id));
+    displayToastNotification("Task Deleted", "error");
   };
 
   const handleDone = () => {
     dispatch(setTaskDone(id));
+    displayToastNotification("Task Completed", "success");
   };
 
   const handleEdit = () => {
@@ -49,6 +52,7 @@ const TaskCard = ({ task }) => {
       return;
     }
     dispatch(editTask(id, sanitizedEditedTitle));
+    displayToastNotification("Task Edited", "success");
     setEditMode(false);
   };
 

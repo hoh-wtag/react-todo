@@ -9,6 +9,7 @@ import {
 } from "@utils/constants/texts.js";
 import IconButton from "@components/IconButton";
 import TextButton from "@components/TextButton";
+import { displayToastNotification } from "@utils/helpers/displayToastNotification";
 import { ICON_DELETE } from "@utils/constants/icons";
 import "./index.scss";
 
@@ -27,6 +28,7 @@ const AddTask = ({ setIsFormOpen }) => {
     dispatch(addTask(sanitizedTitle));
     setTitle("");
     handleCloseForm();
+    displayToastNotification("Task Added", "success");
   };
 
   const handleCloseForm = () => {
