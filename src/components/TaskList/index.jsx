@@ -1,14 +1,18 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { deleteTask, setTaskDone } from "@store/actions";
 import { filterTasks } from "@utils/helpers/filterTasks";
+import { searchTasks } from "@utils/helpers/searchTasks";
 import TaskCard from "@components/TaskCard";
 import "./index.scss";
 
 const TaskList = ({ tasks, visibleTaskRange, isFormOpen, filter }) => {
   const dispatch = useDispatch();
+  const searchQuery = useSelector((state) => state.searchQuery);
 
   const filteredTasks = filterTasks(tasks, filter);
+
+  const searchedTasks = searchTasks(filteredTasks, searchQuery);
 
   let rangeOfTasks = visibleTaskRange;
   if (isFormOpen) {
@@ -25,7 +29,7 @@ const TaskList = ({ tasks, visibleTaskRange, isFormOpen, filter }) => {
 
   return (
     <>
-      {filteredTasks?.slice(0, rangeOfTasks).map((task) => (
+      {searchedTasks?.slice(0, rangeOfTasks).map((task) => (
         <TaskCard
           task={task}
           key={task.id}
