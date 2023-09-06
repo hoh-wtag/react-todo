@@ -1,11 +1,14 @@
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { deleteTask, setTaskDone } from "@store/actions";
+import { filterTasks } from "@utils/helpers/filterTasks";
 import TaskCard from "@components/TaskCard";
 import "./index.scss";
 
-const TaskList = ({ tasks, visibleTaskRange, isFormOpen }) => {
+const TaskList = ({ tasks, visibleTaskRange, isFormOpen, filter }) => {
   const dispatch = useDispatch();
+
+  const filteredTasks = filterTasks(tasks, filter);
 
   let rangeOfTasks = visibleTaskRange;
   if (isFormOpen) {
@@ -22,7 +25,7 @@ const TaskList = ({ tasks, visibleTaskRange, isFormOpen }) => {
 
   return (
     <>
-      {tasks?.slice(0, rangeOfTasks).map((task) => (
+      {filteredTasks?.slice(0, rangeOfTasks).map((task) => (
         <TaskCard
           task={task}
           key={task.id}
@@ -45,6 +48,7 @@ TaskList.propTypes = {
   ),
   visibleTaskRange: PropTypes.number.isRequired,
   isFormOpen: PropTypes.bool.isRequired,
+  filter: PropTypes.string.isRequired,
 };
 
 export default TaskList;
