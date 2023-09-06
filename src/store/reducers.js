@@ -2,6 +2,7 @@ import { ADD_TASK, DELETE_TASK, SET_TASK_DONE, EDIT_TASK } from "@store/types";
 
 const initialState = {
   tasks: [],
+  searchQuery: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +34,11 @@ const reducer = (state = initialState, action) => {
             ? { ...task, title: action.payload.newTitle }
             : task
         ),
+      };
+    case "UPDATE_SEARCH_QUERY":
+      return {
+        ...state,
+        searchQuery: action.payload,
       };
     default:
       return state;

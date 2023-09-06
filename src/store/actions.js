@@ -1,4 +1,10 @@
-import { ADD_TASK, DELETE_TASK, SET_TASK_DONE, EDIT_TASK } from "@store/types";
+import {
+  ADD_TASK,
+  DELETE_TASK,
+  SET_TASK_DONE,
+  EDIT_TASK,
+  UPDATE_SEARCH_QUERY,
+} from "@store/types";
 
 export const addTask = (title) => ({
   type: ADD_TASK,
@@ -27,4 +33,9 @@ export const editTask = (taskId, newTitle) => ({
     taskId,
     newTitle,
   },
+});
+
+export const updateSearchQuery = (query) => ({
+  type: UPDATE_SEARCH_QUERY,
+  payload: query,
 });
