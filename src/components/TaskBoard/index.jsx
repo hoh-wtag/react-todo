@@ -62,18 +62,10 @@ const TaskBoard = () => {
       </div>
       <div>
         {isLoadMore && (
-          <button
-            onClick={showMoreTasks}
-          >
-            Load More
-          </button>
+          <TextButton buttonText={"Load More"} onClick={showMoreTasks} />
         )}
         {isLoadLess && (
-          <button
-            onClick={showLessTasks}
-          >
-            Load Less
-          </button>
+          <TextButton buttonText={"Load Less"} onClick={showLessTasks} />
         )}
       </div>
     </div>
