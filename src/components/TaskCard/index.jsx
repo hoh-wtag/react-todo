@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { deleteTask, setTaskDone, editTask } from "@store/actions";
-import { sanitizeText } from "@utils/helpers/sanitizeText"
+import { sanitizeText } from "@utils/helpers/sanitizeText";
 import { ICON_DELETE, ICON_DONE, ICON_EDIT } from "@utils/constants/icons";
 import {
   ALT_TEXT_DELETE_ICON,
@@ -10,18 +10,17 @@ import {
   ALT_TEXT_EDIT_ICON,
 } from "@utils/constants/texts";
 import { formatDate } from "@utils/helpers/formatDate";
-import { compareDates } from "@utils/helpers/compareDates"
+import { compareDates } from "@utils/helpers/compareDates";
 import { displayToastNotification } from "@utils/helpers/displayToastNotification";
 import IconButton from "@components/IconButton";
 import TextButton from "@components/TextButton";
-import "./index.scss"
+import "./index.scss";
 
 const TaskCard = ({ task }) => {
   const { id, title, createdDate, completedDate, isDone } = task;
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
-  const [error, setError] = useState(null);
 
   const handleDelete = () => {
     dispatch(deleteTask(id));
@@ -44,20 +43,14 @@ const TaskCard = ({ task }) => {
     return daysStr;
   };
 
-
   const handleSave = () => {
     const sanitizedEditedTitle = sanitizeText(editedTitle);
     if (sanitizedEditedTitle === "") {
-      setError("Invalid Text");
+      displayToastNotification("Invalid Title", "danger");
       return;
     }
     dispatch(editTask(id, sanitizedEditedTitle));
     displayToastNotification("Task Edited", "success");
-    setEditMode(false);
-  };
-
-  const handleCancel = () => {
-    setEditedTitle(title);
     setEditMode(false);
   };
 
@@ -68,44 +61,77 @@ const TaskCard = ({ task }) => {
   return (
     <>
       {editMode ? (
-        <div className="task-form" >
+        <div className="task-card">
           <textarea
-            className="task-form__textarea"
+            className="task-card__textarea"
             type="text"
             value={editedTitle}
             onChange={handleChange}
           />
-          {error && <small className="task-form__error">{error}</small>}
-          <TextButton buttonText={"Save"} onClick={handleSave} />
-          <TextButton buttonText={"Cancel"} onClick={handleCancel} />
-        </div >
+          <div className="task-card__bottom">
+            <div className="task-card__button-container">
+              <TextButton
+                className="button"
+                buttonText={"Save"}
+                onClick={handleSave}
+              />
+              <IconButton
+                onClick={handleDone}
+                alt={ALT_TEXT_DONE_ICON}
+                src={ICON_DONE}
+              />
+              <IconButton
+                onClick={handleDelete}
+                alt={ALT_TEXT_DELETE_ICON}
+                src={ICON_DELETE}
+              />
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="task-card">
-          <p className={`${isDone ? "task-card--done__title" : "task-card__title"}`}>
-            {title}
-          </p>
-          <p>Created At: {formatDate(createdDate)}</p>
-          {isDone ?
-            <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
-            <IconButton
-              onClick={handleDone}
-              alt={ALT_TEXT_DONE_ICON}
-              src={ICON_DONE}
-            />
-          }
-          <IconButton
-            onClick={handleEdit}
-            alt={ALT_TEXT_EDIT_ICON}
-            src={ICON_EDIT}
-          />
-          <IconButton
-            onClick={handleDelete}
-            alt={ALT_TEXT_DELETE_ICON}
-            src={ICON_DELETE}
-          />
+          <div className="task-card__top">
+            <p
+              className={`${isDone ? "task-card__title--done" : "task-card__title"
+                }`}
+            >
+              {title}
+            </p>
+            <p className="task-card__date">
+              Created At: {formatDate(createdDate)}
+            </p>
+          </div>
+          <div className="task-card__bottom">
+            <div className="task-card__button-container">
+              {!isDone && (
+                <>
+                  <IconButton
+                    onClick={handleDone}
+                    alt={ALT_TEXT_DONE_ICON}
+                    src={ICON_DONE}
+                  />
+                  <IconButton
+                    onClick={handleEdit}
+                    alt={ALT_TEXT_EDIT_ICON}
+                    src={ICON_EDIT}
+                  />
+                </>
+              )}
+              <IconButton
+                onClick={handleDelete}
+                alt={ALT_TEXT_DELETE_ICON}
+                src={ICON_DELETE}
+              />
+            </div>
+
+            {isDone && (
+              <p className="task-card__completed">
+                Completed in {getDaysToCompleteTask(createdDate, completedDate)}
+              </p>
+            )}
+          </div>
         </div>
-      )
-      }
+      )}
     </>
   );
 };

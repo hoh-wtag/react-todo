@@ -1,20 +1,160 @@
+@import "/src/index.scss";
+
 .task-board {
   margin: auto;
-  max-width: 78rem;
+  width: 80%;
+  padding-top: 3.125rem;
 
-  &__create-button-container {
-    &.margin-bottom {
-      margin-bottom: 0.625rem;
+  &--title {
+    color: $navy-blue;
+    font-size: 1.875rem;
+  }
+
+  &__container {
+    padding-top: 2.125rem;
+    display: grid;
+    gap: 2.125rem;
+    grid-template-columns: repeat(3, calc((100% - 4.25rem) / 3));
+  }
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6.5rem;
+    height: 2.25rem;
+    background-color: $lavender-blue;
+    border-radius: 0.313rem;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.172rem;
+    color: $white;
+    border: none;
+  }
+
+  &__filter-bar {
+    display: flex;
+    gap: 1.25rem;
+
+    &__button-inactive button {
+      background-color: $white;
+      height: 2.25rem;
+      padding: 0 0.938rem;
+      border-radius: 0.313rem;
+      border: 0.063rem solid $light-periwinkle;
+      color: $navy-blue;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    &__button-active button {
+      background-color: $lavender-blue;
+      height: 2.25rem;
+      padding: 0 0.938rem;
+      border-radius: 0.313rem;
+      border: 0.063rem solid $light-periwinkle;
+      color: $white;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+  }
+}
+.pagination {
+  &__container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  &__container button {
+    background-color: $navy-blue;
+    border-radius: 0.313rem;
+    border: 0.063rem solid $light-periwinkle;
+    color: $white;
+    font-size: 1rem;
+    font-weight: 500;
+    height: 2.25rem;
+    margin: 3.563rem 0;
+    width: 7.313rem;
+  }
+}
+
+.empty-page {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+
+  &__container {
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &--text {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: $navy-blue;
+      text-align: center;
+    }
+
+    &--icon {
+      width: 13.313rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .task-board {
+    &__container {
+      grid-template-columns: repeat(1, 100%);
     }
   }
 
-  &__content {
-    .flex {
-      display: flex;
+  .top-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+
+    &__create-button {
+      width: 100%;
     }
 
-    .wrap {
-      flex-wrap: wrap;
+    &__filter-dropdown {
+      display: block;
+    }
+
+    &__filter-bar {
+      display: none;
+    }
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .empty-page {
+    top: 60%;
+    &__container {
+      &--text {
+        font-size: 0.75rem;
+      }
+      &--icon {
+        width: 70%;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .task-board {
+    &__container {
+      grid-template-columns: repeat(2, calc((100% - 2.125rem) / 2));
     }
   }
 }
