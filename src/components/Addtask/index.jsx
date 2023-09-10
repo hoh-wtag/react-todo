@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { addTask } from "@store/actions";
-import { sanitizeText } from "@utils/helpers/sanitizeText"
+import { sanitizeText } from "@utils/helpers/sanitizeText";
 import {
   PLACEHOLDER_TEXT_ADD_TASK,
   ALT_TEXT_DELETE_ICON,
@@ -16,13 +16,12 @@ import "./index.scss";
 const AddTask = ({ setIsFormOpen }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
-  const [error, setError] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const sanitizedTitle = sanitizeText(title);
     if (sanitizedTitle === "") {
-      setError("Invalid Text");
+      displayToastNotification("Invalid Title", "error");
       return;
     }
     dispatch(addTask(sanitizedTitle));
@@ -36,7 +35,7 @@ const AddTask = ({ setIsFormOpen }) => {
   };
 
   function handleChangeText(event) {
-    setTitle(event.target.value)
+    setTitle(event.target.value);
   }
 
   return (
@@ -49,15 +48,17 @@ const AddTask = ({ setIsFormOpen }) => {
           value={title}
           onChange={handleChangeText}
         />
-        {error && <small className="task-form__error">{error}</small>}
-        <TextButton buttonText={"Add Task"} />
+        <div className="task-card__bottom">
+          <div className="task-card__button-container">
+            <TextButton buttonText={"Add Task"} />
+            <IconButton
+              onClick={handleCloseForm}
+              alt={ALT_TEXT_DELETE_ICON}
+              src={ICON_DELETE}
+            />
+          </div>
+        </div>
       </form>
-      <IconButton
-        onClick={handleCloseForm}
-        alt={ALT_TEXT_DELETE_ICON}
-        src={ICON_DELETE}
-      />
-
     </div>
   );
 };

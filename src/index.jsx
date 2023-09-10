@@ -4,9 +4,9 @@ import { Provider } from "react-redux";
 import { ToastContainer, Flip } from "react-toastify";
 import reducer from "@store/reducers";
 import TaskBoard from "@components/TaskBoard";
-import NavBar from "@components/NavBar"
+import NavBar from "@components/NavBar";
 
-import "./index.scss"
+import "./index.scss";
 import "react-toastify/dist/ReactToastify.css";
 
 const store = createStore(reducer);

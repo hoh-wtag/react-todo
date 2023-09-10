@@ -2,11 +2,7 @@ import PropTypes from "prop-types";
 import "@components/IconButton/index.scss";
 
 function IconButton({ src, alt, onClick }) {
-  return (
-    <button onClick={onClick} className="iconButton">
-      <img src={src} alt={alt} />
-    </button>
-  );
+  return <img src={src} alt={alt} onClick={onClick} className="iconButton" />;
 }
 
 IconButton.propTypes = {
