@@ -57,11 +57,10 @@ const TaskBoard = () => {
         <TextButton buttonText={"+ Create"} onClick={handleOpenForm} />
         <div className="top-bar__filter-bar">
           <div
-            className={`${
-              filter === ALL_TASKS
-                ? "top-bar__filter-bar__button-active"
-                : "top-bar__filter-bar__button-inactive"
-            }`}
+            className={`${filter === ALL_TASKS
+              ? "top-bar__filter-bar__button-active"
+              : "top-bar__filter-bar__button-inactive"
+              }`}
           >
             <TextButton
               buttonText={"All"}
@@ -69,11 +68,10 @@ const TaskBoard = () => {
             />
           </div>
           <div
-            className={`${
-              filter === COMPLETED_TASKS
-                ? "top-bar__filter-bar__button-active"
-                : "top-bar__filter-bar__button-inactive"
-            }`}
+            className={`${filter === COMPLETED_TASKS
+              ? "top-bar__filter-bar__button-active"
+              : "top-bar__filter-bar__button-inactive"
+              }`}
           >
             <TextButton
               buttonText={"Completed"}
@@ -81,11 +79,10 @@ const TaskBoard = () => {
             />
           </div>
           <div
-            className={`${
-              filter === INCOMPLETED_TASKS
-                ? "top-bar__filter-bar__button-active"
-                : "top-bar__filter-bar__button-inactive"
-            }`}
+            className={`${filter === INCOMPLETED_TASKS
+              ? "top-bar__filter-bar__button-active"
+              : "top-bar__filter-bar__button-inactive"
+              }`}
           >
             <TextButton
               buttonText={"Incompleted"}
@@ -106,7 +103,7 @@ const TaskBoard = () => {
                 alt={ALT_TEXT_EMPTY_PAE_ICON}
               />
               <h1 className="empty-page__container--text">
-                You didn't add any task. Please, add one.
+                You did not add any task. Please, add one.
               </h1>
             </div>
           </div>
