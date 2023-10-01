@@ -16,7 +16,7 @@ const TaskCard = ({ task }) => {
     dispatch(deleteTask(id));
   };
 
-  const handleDone = () => {
+  function handleDone(){
     dispatch(setTaskDone(id));
   };
 
