@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import "@components/TextButton/index.scss";
 
-function TextButton({ onClick, buttonText }) {
+const TextButton({ onClick, buttonText }) {
   return (
     <button onClick={onClick} className="textButton">
       {buttonText}
