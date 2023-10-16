@@ -52,12 +52,12 @@ const TaskCard = ({ task }) => {
   };
 
   const handleCancel = () => {
-    setEditedTitle(title);
+    setUpdatedTitle(title);
     detEditTask(false);
   };
 
   const handleChange = (event) => {
-    setEditedTitle(event.target.value);
+    setUpdatedTitle(event.target.value);
   };
 
   return (
