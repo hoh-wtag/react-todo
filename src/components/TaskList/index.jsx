@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import { deleteTask, setTaskDone } from "@store/actions";
+import { deleteTask, completeTask } from "@store/actions";
 import TaskCard from "@components/TaskCard";
 import "./index.scss";
 
@@ -16,8 +16,8 @@ const TaskList = ({ tasks, visibleTaskRange, isFormOpen }) => {
     dispatch(deleteTask(taskId));
   };
 
-  const handleDone = (taskId) => {
-    setTaskDone(taskId);
+  const handleCompletedTask = (taskId) => {
+    completeTask(taskId);
   };
 
   return (
@@ -39,7 +39,7 @@ TaskList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      isDone: PropTypes.bool.isRequired,
+      isTaskDone: PropTypes.bool.isRequired,
       createdDate: PropTypes.instanceOf(Date).isRequired,
     })
   ),
