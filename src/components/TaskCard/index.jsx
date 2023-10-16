@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { deleteTask, setTaskDone, editTask } from "@store/actions";
+import { deleteTask, completeTask, editTask } from "@store/actions";
 import { sanitizeText } from "@utils/helpers/sanitizeText"
 import { ICON_DELETE, ICON_DONE, ICON_EDIT } from "@utils/constants/icons";
 import {
@@ -13,10 +13,10 @@ import { formatDate } from "@utils/helpers/formatDate";
 import { compareDates } from "@utils/helpers/compareDates"
 import IconButton from "@components/IconButton";
 import TextButton from "@components/TextButton";
-import "./index.scss"
+import "./index.scss";
 
 const TaskCard = ({ task }) => {
-  const { id, title, createdDate, completedDate, isDone } = task;
+  const { id, title, createdDate, completedDate, isTaskDone } = task;
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
@@ -26,21 +26,20 @@ const TaskCard = ({ task }) => {
     dispatch(deleteTask(id));
   };
 
-  const handleDone = () => {
-    dispatch(setTaskDone(id));
+  function handleDone(){
+    dispatch(completeTask(id));
   };
 
   const handleEdit = () => {
     setEditMode(true);
   };
 
-  const getDaysToCompleteTask = (startDate, endDate) => {
-    const diffInDays = compareDates(startDate, endDate);
-    const daysStr = diffInDays > 1 ? `${diffInDays} days` : `${diffInDays} day`;
+  const getRemainingDaysToCompleteTask  = (startDate, endDate) => {
+    const dayDifference  = compareDates(startDate, endDate);
+    const daysCount = dayDifference > 1 ? `${dayDifference} days` : `${dayDifference} day`;
 
-    return daysStr;
+    return daysCount;
   };
-
 
   const handleSave = () => {
     const sanitizedEditedTitle = sanitizeText(editedTitle);
@@ -77,12 +76,12 @@ const TaskCard = ({ task }) => {
         </div >
       ) : (
         <div className="task-card">
-          <p className={`${isDone ? "task-card--done__title" : "task-card__title"}`}>
+          <p className={`${isTaskDone ? "task-card--done__title" : "task-card__title"}`}>
             {title}
           </p>
           <p>Created At: {formatDate(createdDate)}</p>
-          {isDone ?
-            <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
+          {isTaskDone ?
+            <>Completed in {getRemainingDaysToCompleteTask(createdDate, completedDate)}</> :
             <IconButton
               onClick={handleDone}
               alt={ALT_TEXT_DONE_ICON}
@@ -112,7 +111,7 @@ TaskCard.propTypes = {
     title: PropTypes.string.isRequired,
     createdDate: PropTypes.instanceOf(Date).isRequired,
     completedDate: PropTypes.instanceOf(Date),
-    isDone: PropTypes.bool.isRequired,
+    isTaskDone: PropTypes.bool.isRequired,
   }),
 };
 

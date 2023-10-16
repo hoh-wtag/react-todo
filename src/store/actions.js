@@ -7,7 +7,7 @@ export const addTask = (title) => ({
     title: title,
     createdDate: new Date(),
     completedDate: null,
-    isDone: false,
+    isTaskDone: false,
   },
 });
 
@@ -16,8 +16,8 @@ export const deleteTask = (taskId) => ({
   payload: taskId,
 });
 
-export const setTaskDone = (taskId) => ({
-  type: SET_TASK_DONE,
+export const completeTask = (taskId) => ({
+  type: COMPLETE_TASK,
   payload: taskId,
 });
 
