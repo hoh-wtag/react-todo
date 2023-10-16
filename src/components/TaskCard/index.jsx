@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { deleteTask, setTaskDone } from "@store/actions";
+import { deleteTask, completeTask } from "@store/actions";
 import { ICON_DELETE, ICON_DONE } from "@utils/constants/icons";
 import { ALT_TEXT_DELETE_ICON, ALT_TEXT_DONE_ICON } from "@utils/constants/texts";
 import { formatDate } from "@utils/helpers/formatDate";
@@ -17,10 +17,10 @@ const TaskCard = ({ task }) => {
   };
 
   function handleDone(){
-    dispatch(setTaskDone(id));
+    dispatch(completeTask(id));
   };
 
-  const getDaysToCompleteTask = (startDate, endDate) => {
+  const getRemainingDaysToCompleteTask  = (startDate, endDate) => {
     const dayDifference  = compareDates(startDate, endDate);
     const daysCount = dayDifference > 1 ? `${dayDifference} days` : `${dayDifference} day`;
 
@@ -34,10 +34,10 @@ const TaskCard = ({ task }) => {
       </p>
       <p>Created At: {formatDate(createdDate)}</p>
       {isTaskDone ?
-        <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
+        <>Completed in {getRemainingDaysToCompleteTask(createdDate, completedDate)}</> :
         <Button
           onClick={handleDone}
-          alt={ALT_TEXT_DONE_ICON}
+          imageAltText={ALT_TEXT_DONE_ICON}
           src={ICON_DONE}
         />
       }
