@@ -18,20 +18,20 @@ import "./index.scss";
 const TaskCard = ({ task }) => {
   const { id, title, createdDate, completedDate, isTaskDone } = task;
   const dispatch = useDispatch();
-  const [editMode, setEditMode] = useState(false);
-  const [editedTitle, setEditedTitle] = useState(task.title);
+  const [editTask, detEditTask] = useState(false);
+  const [updatedTitle, setUpdatedTitle] = useState(task.title);
   const [error, setError] = useState(null);
 
   const handleDelete = () => {
     dispatch(deleteTask(id));
   };
 
-  function handleDone(){
+  function handleCompletedTask(){
     dispatch(completeTask(id));
   };
 
   const handleEdit = () => {
-    setEditMode(true);
+    detEditTask(true);
   };
 
   const getRemainingDaysToCompleteTask  = (startDate, endDate) => {
@@ -42,18 +42,18 @@ const TaskCard = ({ task }) => {
   };
 
   const handleSave = () => {
-    const sanitizedEditedTitle = sanitizeText(editedTitle);
+    const sanitizedEditedTitle = sanitizeText(updatedTitle);
     if (sanitizedEditedTitle === "") {
-      setError("Invalid Text");
+      setError("Title Can't Be Empty");
       return;
     }
     dispatch(editTask(id, sanitizedEditedTitle));
-    setEditMode(false);
+    detEditTask(false);
   };
 
   const handleCancel = () => {
     setEditedTitle(title);
-    setEditMode(false);
+    detEditTask(false);
   };
 
   const handleChange = (event) => {
@@ -67,12 +67,12 @@ const TaskCard = ({ task }) => {
           <textarea
             className="task-form__textarea"
             type="text"
-            value={editedTitle}
+            value={updatedTitle}
             onChange={handleChange}
           />
           {error && <small className="task-form__error">{error}</small>}
-          <TextButton buttonText={"Save"} onClick={handleSave} />
-          <TextButton buttonText={"Cancel"} onClick={handleCancel} />
+          <TextButton text={"Save"} onClick={handleSave} />
+          <TextButton text={"Cancel"} onClick={handleCancel} />
         </div >
       ) : (
         <div className="task-card">
@@ -83,7 +83,7 @@ const TaskCard = ({ task }) => {
           {isTaskDone ?
             <>Completed in {getRemainingDaysToCompleteTask(createdDate, completedDate)}</> :
             <IconButton
-              onClick={handleDone}
+              onClick={handleCompletedTask}
               alt={ALT_TEXT_DONE_ICON}
               src={ICON_DONE}
             />

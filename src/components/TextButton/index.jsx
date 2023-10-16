@@ -1,17 +1,17 @@
 import PropTypes from "prop-types";
 import "@components/TextButton/index.scss";
 
-function TextButton({ onClick, buttonText }) {
+function TextButton({ onClick, text }) {
   return (
     <button onClick={onClick} className="textButton">
-      {buttonText}
+      {text}
     </button>
   );
 }
 
 TextButton.propTypes = {
   onClick: PropTypes.func,
-  buttonText: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default TextButton;

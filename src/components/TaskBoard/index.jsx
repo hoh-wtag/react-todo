@@ -15,7 +15,7 @@ const TaskBoard = () => {
     <div className="task-board">
       <div className="task-board__create-button-container margin-bottom">
         <TextButton
-          buttonText={"+ Create"}
+          text={"+ Create"}
           onClick={handleOpenForm}
         />
       </div>

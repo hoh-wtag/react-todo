@@ -13,7 +13,7 @@ const TaskList = () => {
     dispatch(deleteTask(taskId));
   };
 
-  const handleDone = (taskId) => {
+  const handleCompletedTask = (taskId) => {
     completeTask(taskId);
   };
 
@@ -23,7 +23,7 @@ const TaskList = () => {
         key={task.id}
         task={task}
         onDelete={() => handleDelete(task.id)}
-        onDone={() => handleDone(task.id)}
+        onDone={() => handleCompletedTask(task.id)}
       />
     ))
   );
