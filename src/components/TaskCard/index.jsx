@@ -4,12 +4,12 @@ import { deleteTask, setTaskDone } from "@store/actions";
 import { ICON_DELETE, ICON_DONE } from "@utils/constants/icons";
 import { ALT_TEXT_DELETE_ICON, ALT_TEXT_DONE_ICON } from "@utils/constants/texts";
 import { formatDate } from "@utils/helpers/formatDate";
-import { compareDates } from "@utils/helpers/compareDates"
+import { compareDates } from "@utils/helpers/compareDates";
 import Button from "@components/Button";
-import "./index.scss"
+import "./index.scss";
 
 const TaskCard = ({ task }) => {
-  const { id, title, createdDate, completedDate, isDone } = task;
+  const { id, title, createdDate, completedDate, isTaskDone } = task;
   const dispatch = useDispatch();
 
   const handleDelete = () => {
@@ -21,19 +21,19 @@ const TaskCard = ({ task }) => {
   };
 
   const getDaysToCompleteTask = (startDate, endDate) => {
-    const diffInDays = compareDates(startDate, endDate);
-    const daysStr = diffInDays > 1 ? `${diffInDays} days` : `${diffInDays} day`;
+    const dayDifference  = compareDates(startDate, endDate);
+    const daysCount = dayDifference > 1 ? `${dayDifference} days` : `${dayDifference} day`;
 
-    return daysStr;
+    return daysCount;
   };
 
   return (
     <div className="task-card">
-      <p className={`${isDone ? "task-card--done__title" : "task-card__title"}`}>
+      <p className={`${isTaskDone ? "task-card--done__title" : "task-card__title"}`}>
         {title}
       </p>
       <p>Created At: {formatDate(createdDate)}</p>
-      {isDone ?
+      {isTaskDone ?
         <>Completed in {getDaysToCompleteTask(createdDate, completedDate)}</> :
         <Button
           onClick={handleDone}
@@ -57,7 +57,7 @@ TaskCard.propTypes = {
     title: PropTypes.string.isRequired,
     createdDate: PropTypes.instanceOf(Date).isRequired,
     completedDate: PropTypes.instanceOf(Date),
-    isDone: PropTypes.bool.isRequired,
+    isTaskDone: PropTypes.bool.isRequired,
   }),
 };
 
