@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import TaskList from "@components/TaskList";
 import AddTask from "@components/Addtask";
 import { MAX_TASK_PER_PAGE } from "@utils/constants/values";
+import { LOAD_MORE, LOAD_LESS } from "@utils/constants/texts";
 import TextButton from "@components/TextButton";
 import "./index.scss"
 
@@ -62,10 +63,10 @@ const TaskBoard = () => {
       </div>
       <div>
         {isLoadMore && (
-          <TextButton buttonText={"Load More"} onClick={showMoreTasks} />
+          <TextButton buttonText={LOAD_MORE} onClick={showMoreTasks} />
         )}
         {isLoadLess && (
-          <TextButton buttonText={"Load Less"} onClick={showLessTasks} />
+          <TextButton buttonText={LOAD_LESS} onClick={showLessTasks} />
         )}
       </div>
     </div>

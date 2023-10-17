@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { deleteTask, completeTask } from "@store/actions";
@@ -6,10 +7,11 @@ import "./index.scss";
 
 const TaskList = ({ tasks, visibleTaskRange, isFormOpen }) => {
   const dispatch = useDispatch();
+  
+  const [rangeOfTasks, setRangeOfTasks] = useState(visibleTaskRange);
 
-  let rangeOfTasks = visibleTaskRange;
   if (isFormOpen) {
-    rangeOfTasks -= 1;
+    setRangeOfTasks(rangeOfTasks-1);
   }
 
   const handleDelete = (taskId) => {
