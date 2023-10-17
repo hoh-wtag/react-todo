@@ -44,7 +44,7 @@ const TaskCard = ({ task }) => {
 
       <Button
         onClick={handleDelete}
-        alt={ALT_TEXT_DELETE_ICON}
+        imageAltText={ALT_TEXT_DELETE_ICON}
         src={ICON_DELETE}
       />
     </div>
