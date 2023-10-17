@@ -52,7 +52,7 @@ const AddTask = ({ setIsFormOpen }) => {
       </form>
       <IconButton
         onClick={handleCloseForm}
-        alt={ALT_TEXT_DELETE_ICON}
+        imageAltText={ALT_TEXT_DELETE_ICON}
         src={ICON_DELETE}
       />
 

@@ -18,7 +18,7 @@ import "./index.scss";
 const TaskCard = ({ task }) => {
   const { id, title, createdDate, completedDate, isTaskDone } = task;
   const dispatch = useDispatch();
-  const [editTask, detEditTask] = useState(false);
+  const [editTaskState, setEditTaskState] = useState(false);
   const [updatedTitle, setUpdatedTitle] = useState(task.title);
   const [error, setError] = useState(null);
 
@@ -31,7 +31,7 @@ const TaskCard = ({ task }) => {
   };
 
   const handleEdit = () => {
-    detEditTask(true);
+    setEditTaskState(true);
   };
 
   const getRemainingDaysToCompleteTask  = (startDate, endDate) => {
@@ -48,21 +48,21 @@ const TaskCard = ({ task }) => {
       return;
     }
     dispatch(editTask(id, sanitizedEditedTitle));
-    detEditTask(false);
+    setEditTaskState(false);
   };
 
   const handleCancel = () => {
-    setEditedTitle(title);
-    detEditTask(false);
+    setUpdatedTitle(title);
+    setEditTaskState(false);
   };
 
   const handleChange = (event) => {
-    setEditedTitle(event.target.value);
+    setUpdatedTitle(event.target.value);
   };
 
   return (
     <>
-      {editMode ? (
+      {editTaskState ? (
         <div className="task-form" >
           <textarea
             className="task-form__textarea"
@@ -84,18 +84,18 @@ const TaskCard = ({ task }) => {
             <>Completed in {getRemainingDaysToCompleteTask(createdDate, completedDate)}</> :
             <IconButton
               onClick={handleCompletedTask}
-              alt={ALT_TEXT_DONE_ICON}
+              imageAltText={ALT_TEXT_DONE_ICON}
               src={ICON_DONE}
             />
           }
           <IconButton
             onClick={handleEdit}
-            alt={ALT_TEXT_EDIT_ICON}
+            imageAltText={ALT_TEXT_EDIT_ICON}
             src={ICON_EDIT}
           />
           <IconButton
             onClick={handleDelete}
-            alt={ALT_TEXT_DELETE_ICON}
+            imageAltText={ALT_TEXT_DELETE_ICON}
             src={ICON_DELETE}
           />
         </div>
