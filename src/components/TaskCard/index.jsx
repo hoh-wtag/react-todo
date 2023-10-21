@@ -1,23 +1,37 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { deleteTask, completeTask } from "@store/actions";
-import { ICON_DELETE, ICON_DONE } from "@utils/constants/icons";
-import { ALT_TEXT_DELETE_ICON, ALT_TEXT_DONE_ICON } from "@utils/constants/texts";
+import { deleteTask, completeTask, editTask } from "@store/actions";
+import { sanitizeText } from "@utils/helpers/sanitizeText"
+import { ICON_DELETE, ICON_DONE, ICON_EDIT } from "@utils/constants/icons";
+import {
+  ALT_TEXT_DELETE_ICON,
+  ALT_TEXT_DONE_ICON,
+  ALT_TEXT_EDIT_ICON,
+} from "@utils/constants/texts";
 import { formatDate } from "@utils/helpers/formatDate";
-import { compareDates } from "@utils/helpers/compareDates";
-import Button from "@components/Button";
+import { compareDates } from "@utils/helpers/compareDates"
+import IconButton from "@components/IconButton";
+import TextButton from "@components/TextButton";
 import "./index.scss";
 
 const TaskCard = ({ task }) => {
   const { id, title, createdDate, completedDate, isTaskDone } = task;
   const dispatch = useDispatch();
+  const [editTaskState, setEditTaskState] = useState(false);
+  const [updatedTitle, setUpdatedTitle] = useState(task.title);
+  const [error, setError] = useState(null);
 
   const handleDelete = () => {
     dispatch(deleteTask(id));
   };
 
-  function handleDone(){
+  function handleCompletedTask(){
     dispatch(completeTask(id));
+  };
+
+  const handleEdit = () => {
+    setEditTaskState(true);
   };
 
   const getRemainingDaysToCompleteTask  = (startDate, endDate) => {
@@ -27,28 +41,68 @@ const TaskCard = ({ task }) => {
     return daysCount;
   };
 
-  return (
-    <div className="task-card">
-      <p className={`${isTaskDone ? "task-card--done__title" : "task-card__title"}`}>
-        {title}
-      </p>
-      <p>Created At: {formatDate(createdDate)}</p>
-      {isTaskDone ?
-        <>Completed in {getRemainingDaysToCompleteTask(createdDate, completedDate)}</> :
-        <Button
-          onClick={handleDone}
-          imageAltText={ALT_TEXT_DONE_ICON}
-          src={ICON_DONE}
-        />
-      }
+  const handleSave = () => {
+    const sanitizedEditedTitle = sanitizeText(updatedTitle);
+    if (sanitizedEditedTitle === "") {
+      setError("Title Can't Be Empty");
+      return;
+    }
+    dispatch(editTask(id, sanitizedEditedTitle));
+    setEditTaskState(false);
+  };
 
-      <Button
-        onClick={handleDelete}
-        imageAltText={ALT_TEXT_DELETE_ICON}
-        src={ICON_DELETE}
-      />
-    </div>
-  )
+  const handleCancel = () => {
+    setUpdatedTitle(title);
+    setEditTaskState(false);
+  };
+
+  const handleChange = (event) => {
+    setUpdatedTitle(event.target.value);
+  };
+
+  return (
+    <>
+      {editTaskState ? (
+        <div className="task-form" >
+          <textarea
+            className="task-form__textarea"
+            type="text"
+            value={updatedTitle}
+            onChange={handleChange}
+          />
+          {error && <small className="task-form__error">{error}</small>}
+          <TextButton text={"Save"} onClick={handleSave} />
+          <TextButton text={"Cancel"} onClick={handleCancel} />
+        </div >
+      ) : (
+        <div className="task-card">
+          <p className={`${isTaskDone ? "task-card--done__title" : "task-card__title"}`}>
+            {title}
+          </p>
+          <p>Created At: {formatDate(createdDate)}</p>
+          {isTaskDone ?
+            <>Completed in {getRemainingDaysToCompleteTask(createdDate, completedDate)}</> :
+            <IconButton
+              onClick={handleCompletedTask}
+              imageAltText={ALT_TEXT_DONE_ICON}
+              src={ICON_DONE}
+            />
+          }
+          <IconButton
+            onClick={handleEdit}
+            imageAltText={ALT_TEXT_EDIT_ICON}
+            src={ICON_EDIT}
+          />
+          <IconButton
+            onClick={handleDelete}
+            imageAltText={ALT_TEXT_DELETE_ICON}
+            src={ICON_DELETE}
+          />
+        </div>
+      )
+      }
+    </>
+  );
 };
 
 TaskCard.propTypes = {

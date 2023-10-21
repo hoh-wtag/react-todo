@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TaskList from "@components/TaskList";
 import AddTask from "@components/Addtask";
+import TextButton from "@components/TextButton";
 import "./index.scss"
 
 const TaskBoard = () => {
@@ -13,9 +14,10 @@ const TaskBoard = () => {
   return (
     <div className="task-board">
       <div className="task-board__create-button-container margin-bottom">
-        <button onClick={handleOpenForm}>
-          + Create
-        </button>
+        <TextButton
+          text={"+ Create"}
+          onClick={handleOpenForm}
+        />
       </div>
 
       <div className="task-board__content flex wrap">

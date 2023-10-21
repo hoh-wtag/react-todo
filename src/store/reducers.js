@@ -1,4 +1,4 @@
-import { ADD_TASK, DELETE_TASK, COMPLETE_TASK } from "@store/types";
+import { ADD_TASK, DELETE_TASK, COMPLETE_TASK, EDIT_TASK } from "@store/types";
 
 const initialState = {
   tasks: [],
@@ -22,6 +22,15 @@ const reducer = (state = initialState, action) => {
         tasks: state.tasks.map((task) =>
           task.id === action.payload
             ? { ...task, isDone: true, completedDate: new Date() }
+            : task
+        ),
+      };
+    case EDIT_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.map((task) =>
+          task.id === action.payload.taskId
+            ? { ...task, title: action.payload.newTitle }
             : task
         ),
       };
