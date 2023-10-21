@@ -1,4 +1,4 @@
-import { ADD_TASK, DELETE_TASK, SET_TASK_DONE, EDIT_TASK } from "@store/types";
+import { ADD_TASK, DELETE_TASK, COMPLETE_TASK, EDIT_TASK } from "@store/types";
 
 export const addTask = (title) => ({
   type: ADD_TASK,
