@@ -3,13 +3,20 @@ import { useSelector } from "react-redux";
 import TaskList from "@components/TaskList";
 import AddTask from "@components/Addtask";
 import { MAX_TASK_PER_PAGE } from "@utils/constants/values";
-import { LOAD_MORE, LOAD_LESS } from "@utils/constants/texts";
+import {
+  ALL_TASKS,
+  COMPLETED_TASKS,
+  INCOMPLETED_TASKS,
+  LOAD_MORE,
+  LOAD_LESS
+} from "@utils/constants/texts";
 import TextButton from "@components/TextButton";
-import "./index.scss"
+import "./index.scss";
 
 const TaskBoard = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [visibleTaskRange, setVisibleTaskRange] = useState(MAX_TASK_PER_PAGE);
+  const [filter, setFilter] = useState(ALL_TASKS);
   const tasks = useSelector((state) => state.tasks);
 
   const handleOpenForm = () => {
@@ -50,6 +57,20 @@ const TaskBoard = () => {
           onClick={handleOpenForm}
         />
       </div>
+      <div className="filter-buttons">
+        <TextButton
+          buttonText={"All"}
+          onClick={() => setFilter(ALL_TASKS)}
+        />
+        <TextButton
+          buttonText={"Completed"}
+          onClick={() => setFilter(COMPLETED_TASKS)}
+        />
+        <TextButton
+          buttonText={"Incompleted"}
+          onClick={() => setFilter(INCOMPLETED_TASKS)}
+        />
+      </div>
 
       <div className="task-board__content flex wrap">
         {isFormOpen && (
@@ -59,6 +80,7 @@ const TaskBoard = () => {
           tasks={tasks}
           visibleTaskRange={visibleTaskRange}
           isFormOpen={isFormOpen}
+          filter={filter}
         />
       </div>
       <div>
