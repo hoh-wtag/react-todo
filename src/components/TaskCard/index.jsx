@@ -18,7 +18,7 @@ import "./index.scss";
 const TaskCard = ({ task }) => {
   const { id, title, createdDate, completedDate, isTaskDone } = task;
   const dispatch = useDispatch();
-  const [editTask, detEditTask] = useState(false);
+  const [editTaskState, setEditTaskState] = useState(false);
   const [updatedTitle, setUpdatedTitle] = useState(task.title);
   const [error, setError] = useState(null);
 
@@ -31,7 +31,7 @@ const TaskCard = ({ task }) => {
   };
 
   const handleEdit = () => {
-    detEditTask(true);
+    setEditTaskState(true);
   };
 
   const getRemainingDaysToCompleteTask  = (startDate, endDate) => {
@@ -48,12 +48,12 @@ const TaskCard = ({ task }) => {
       return;
     }
     dispatch(editTask(id, sanitizedEditedTitle));
-    detEditTask(false);
+    setEditTaskState(false);
   };
 
   const handleCancel = () => {
     setUpdatedTitle(title);
-    detEditTask(false);
+    setEditTaskState(false);
   };
 
   const handleChange = (event) => {
@@ -62,7 +62,7 @@ const TaskCard = ({ task }) => {
 
   return (
     <>
-      {editMode ? (
+      {editTaskState ? (
         <div className="task-form" >
           <textarea
             className="task-form__textarea"
