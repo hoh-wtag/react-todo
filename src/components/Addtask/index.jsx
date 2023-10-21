@@ -48,11 +48,11 @@ const AddTask = ({ setIsFormOpen }) => {
           onChange={handleChangeText}
         />
         {error && <small className="task-form__error">{error}</small>}
-        <TextButton buttonText={"Add Task"} />
+        <TextButton text={"Add Task"} />
       </form>
       <IconButton
         onClick={handleCloseForm}
-        alt={ALT_TEXT_DELETE_ICON}
+        imageAltText={ALT_TEXT_DELETE_ICON}
         src={ICON_DELETE}
       />
 

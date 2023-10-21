@@ -7,6 +7,8 @@ import {
   ALL_TASKS,
   COMPLETED_TASKS,
   INCOMPLETED_TASKS,
+  LOAD_MORE,
+  LOAD_LESS
 } from "@utils/constants/texts";
 import TextButton from "@components/TextButton";
 import "./index.scss";
@@ -51,7 +53,7 @@ const TaskBoard = () => {
     <div className="task-board">
       <div className="task-board__create-button-container margin-bottom">
         <TextButton
-          buttonText={"+ Create"}
+          text={"+ Create"}
           onClick={handleOpenForm}
         />
       </div>
@@ -83,10 +85,10 @@ const TaskBoard = () => {
       </div>
       <div>
         {isLoadMore && (
-          <TextButton buttonText={"Load More"} onClick={showMoreTasks} />
+          <TextButton buttonText={LOAD_MORE} onClick={showMoreTasks} />
         )}
         {isLoadLess && (
-          <TextButton buttonText={"Load Less"} onClick={showLessTasks} />
+          <TextButton buttonText={LOAD_LESS} onClick={showLessTasks} />
         )}
       </div>
     </div>
