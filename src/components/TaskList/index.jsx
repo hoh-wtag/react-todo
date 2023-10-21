@@ -1,13 +1,18 @@
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { deleteTask, completeTask } from "@store/actions";
 import TaskCard from "@components/TaskCard";
 import "./index.scss";
 
-const TaskList = () => {
-  const tasks = useSelector((state) => state.tasks);
+const TaskList = ({ tasks, visibleTaskRange, isFormOpen }) => {
   const dispatch = useDispatch();
+  
+  const [rangeOfTasks, setRangeOfTasks] = useState(visibleTaskRange);
+
+  if (isFormOpen) {
+    setRangeOfTasks(rangeOfTasks-1);
+  }
 
   const handleDelete = (taskId) => {
     dispatch(deleteTask(taskId));
@@ -18,26 +23,30 @@ const TaskList = () => {
   };
 
   return (
-    tasks.map((task) => (
-      <TaskCard
-        key={task.id}
-        task={task}
-        onDelete={() => handleDelete(task.id)}
-        onDone={() => handleCompletedTask(task.id)}
-      />
-    ))
+    <>
+      {tasks?.slice(0, rangeOfTasks).map((task) => (
+        <TaskCard
+          task={task}
+          key={task.id}
+          onDelete={() => handleDelete(task.id)}
+          onDone={() => handleDone(task.id)}
+        />
+      ))}
+    </>
   );
 };
 
 TaskList.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       isTaskDone: PropTypes.bool.isRequired,
       createdDate: PropTypes.instanceOf(Date).isRequired,
     })
   ),
+  visibleTaskRange: PropTypes.number.isRequired,
+  isFormOpen: PropTypes.bool.isRequired,
 };
 
 export default TaskList;
